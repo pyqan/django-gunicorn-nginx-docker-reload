@@ -15,7 +15,7 @@ services:
       - "8000:8000"
     command:
       "gunicorn --reload --workers=2 --bind=0.0.0.0:8000 mysite.wsgi:application"
-    nginx:
+  nginx:
     image: nginx:1.17
     container_name: ngx
     ports:
