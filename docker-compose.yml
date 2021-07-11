@@ -7,11 +7,15 @@ services:
     restart: always
     env_file:
       - django.env
+    volumes:
+      - type: bind
+        source: ./app
+        target: /src     
     ports:
       - "8000:8000"
     command:
-    "/src/restart.sh"
-  nginx:
+      "gunicorn --reload --workers=2 --bind=0.0.0.0:8000 mysite.wsgi:application"
+    nginx:
     image: nginx:1.17
     container_name: ngx
     ports:
